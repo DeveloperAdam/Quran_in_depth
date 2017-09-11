@@ -218,15 +218,7 @@ public class ExplorerActivity extends AppCompatActivity
         }
 
         else {
-//            quran_id = "1";
-//            name = "The Opening";
-//            arabic_name = "الْفَاتِحَة";
-//            verses = "";
-//            rukus = "1";
-//            relevation = "5";
-//            parah ="0";
-//            sajda_count = "- -";
-//            dataBaseHelper.caper_details(quran_id);
+
         }
     }
 

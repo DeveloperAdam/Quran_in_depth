@@ -1,7 +1,10 @@
 package com.depth.quran.quran_indepth.activity.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,13 +20,22 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.depth.quran.quran_indepth.R;
+import com.depth.quran.quran_indepth.activity.Config;
 import com.depth.quran.quran_indepth.activity.adapter.BaseAdpterList;
+import com.depth.quran.quran_indepth.activity.dbhelper.DataBaseHelper;
+import com.depth.quran.quran_indepth.activity.model.QuranListModel;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class SettingActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     ListView lv;
     BaseAdpterList baseAdpterList;
+    DataBaseHelper dataBaseHelper;
+    static boolean showTranslation;
     Switch aSwitch;
+    Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +45,7 @@ public class SettingActivity extends AppCompatActivity
 
         aSwitch=(Switch)findViewById(R.id.TranslationSwitch);
         lv=(ListView)findViewById(R.id.left_drawer);
+        mContext=this;
 
         String names[]={"Analyze Quran","Explorer","Quran Chapters","Quran Dictionary","Bookmarks","Start Tour","About","Settings"};
         int images[]={R.drawable.analyze_quran,R.drawable.ic_library_books,R.drawable.ic_list,R.drawable.ic_font_download,
@@ -93,11 +106,14 @@ public class SettingActivity extends AppCompatActivity
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean ifCleaked) {
-                if(ifCleaked){
 
+
+                if(ifCleaked){
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+                    showTranslation = sharedPreferences.getBoolean(Config.SHOW_TRANSLATION, Config.defaultShowTranslation);
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"off",Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
